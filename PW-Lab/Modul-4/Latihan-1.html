@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ucapan Selamat Waktu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Klik Tombol untuk Mendapatkan Ucapan Selamat!</h1>
+        <button onclick="displayGreeting()">Tampilkan Ucapan</button>
+    </div>
+
+    <script>
+        function displayGreeting() {
+            const date = new Date();
+            const hour = date.getHours();
+
+            let greeting;
+            if (hour >= 5 && hour < 12) {
+                greeting = "Selamat Pagi!";
+            } else if (hour >= 12 && hour < 18) {
+                greeting = "Selamat Siang!";
+            } else {
+                greeting = "Selamat Malam!";
+            }
+
+            alert(greeting);
+        }
+    </script>
+
+</body>
+</html>

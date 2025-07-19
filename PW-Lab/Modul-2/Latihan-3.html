@@ -1,0 +1,73 @@
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Latihan-3</title>
+  <style>
+    header, nav, footer {
+      background-color: #eee;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+    }
+    section {
+      background: #f9f9f9;
+      text-align: center;
+      padding: 30px;
+      font-size: 1.5em;
+      font-style: italic;
+    }
+    .articles {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    article {
+      border: 1px solid #ccc;
+      width: 250px;
+      padding: 10px;
+      text-align: center;
+    }
+    article:hover button {
+      background-color: #ddd;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lab Pemrograman Web</h1>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="latihan-4.html">Profile</a>
+    <a href="#">Contact Us</a>
+  </nav>
+  <section>
+    "The purpose of our lives is to be happy."<br>- DALAI LAMA -
+  </section>
+  <div class="articles">
+    <article>
+      <img src="img-1/atom.png" alt="Atom" width="100%">
+      <p>An atom is the smallest unit of ordinary matter that forms a chemical element.</p>
+      <button onclick="location.href='latihan-1.html'">View</button><br>
+      <small>9 mins</small>
+    </article>
+    <article>
+      <img src="img-2/wild.webp" alt="Wildlife" width="100%">
+      <p>World Wildlife Fund is committed to endangered species protection.</p>
+      <button onclick="location.href='latihan-2.html'">View</button><br>
+      <small>9 mins</small>
+    </article>
+  </div>
+  <footer>
+    Copyright © Azzahra 2025
+  </footer>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mencari Akar Persamaan Kuadrat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .equation {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .input-group label {
+            width: 50px;
+            font-weight: bold;
+            margin-right: 10px;
+            text-align: right;
+        }
+        .input-group input[type="number"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button#resetBtn {
+            background-color: #dc3545;
+        }
+        button#resetBtn:hover {
+            background-color: #c82333;
+        }
+        .results {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .results p {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        .results strong {
+            display: inline-block;
+            width: 80px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Mencari Akar Persamaan Kuadrat</h1>
+        <p class="equation">F(x) = ax² + bx + c</p>
+
+        <div class="input-group">
+            <label for="a">a =</label>
+            <input type="number" id="a" value="1">
+        </div>
+        <div class="input-group">
+            <label for="b">b =</label>
+            <input type="number" id="b" value="-3">
+        </div>
+        <div class="input-group">
+            <label for="c">c =</label>
+            <input type="number" id="c" value="2">
+        </div>
+
+        <div class="button-group">
+            <button id="hitungBtn">Hitung Akar</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+
+        <div class="results">
+            <p><strong>Diskriminan (D):</strong> <span id="discriminant"></span></p>
+            <p><strong>Akar x1:</strong> <span id="x1"></span></p>
+            <p><strong>Akar x2:</strong> <span id="x2"></span></p>
+            <p id="errorMsg" class="error" style="display:none;"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hitungBtn').addEventListener('click', function() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            const discriminantSpan = document.getElementById('discriminant');
+            const x1Span = document.getElementById('x1');
+            const x2Span = document.getElementById('x2');
+            const errorMsg = document.getElementById('errorMsg');
+
+            discriminantSpan.textContent = '';
+            x1Span.textContent = '';
+            x2Span.textContent = '';
+            errorMsg.style.display = 'none';
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                errorMsg.textContent = "Mohon masukkan semua nilai (a, b, c) dengan angka yang valid.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            if (a === 0) {
+                errorMsg.textContent = "Nilai 'a' tidak boleh nol untuk persamaan kuadrat.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            const discriminant = (b * b) - (4 * a * c);
+            discriminantSpan.textContent = discriminant.toFixed(2);
+
+            if (discriminant < 0) {
+                errorMsg.textContent = "Diskriminan negatif, akar-akar adalah bilangan kompleks (tidak real).";
+                errorMsg.style.display = 'block';
+                x1Span.textContent = "Kompleks";
+                x2Span.textContent = "Kompleks";
+            } else if (discriminant === 0) {
+                const x = -b / (2 * a);
+                x1Span.textContent = x.toFixed(2);
+                x2Span.textContent = x.toFixed(2) + " (akar kembar)";
+            } else {
+                const sqrtDiscriminant = Math.sqrt(discriminant);
+                const x1 = (-b + sqrtDiscriminant) / (2 * a);
+                const x2 = (-b - sqrtDiscriminant) / (2 * a);
+                x1Span.textContent = x1.toFixed(2);
+                x2Span.textContent = x2.toFixed(2);
+            }
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            document.getElementById('a').value = 1;
+            document.getElementById('b').value = -3;
+            document.getElementById('c').value = 2;
+            document.getElementById('discriminant').textContent = '';
+            document.getElementById('x1').textContent = '';
+            document.getElementById('x2').textContent = '';
+            document.getElementById('errorMsg').style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Faktorial dan Deret</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+        }
+        h1 { color: #333; margin-bottom: 25px; }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label { font-weight: bold; width: 80px; text-align: left; }
+        .form-group input[type="number"], .form-group input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .form-group input[type="text"][readonly] {
+            background-color: #e9e9e9;
+            color: #555;
+        }
+        .button-group {
+            margin-top: 25px;
+        }
+        .button-group button {
+            padding: 10px 25px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button-group button#submitBtn {
+            background-color: #28a745;
+            color: white;
+        }
+        .button-group button#submitBtn:hover {
+            background-color: #218838;
+        }
+        .button-group button#resetBtn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .button-group button#resetBtn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>PERHITUNGAN<br>FAKTORIAL dan DERET</h1>
+
+        <div class="form-group">
+            <label for="inputN">N</label>
+            <input type="number" id="inputN" min="0" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="hasilDeret">Hasil</label>
+            <input type="text" id="hasilDeret" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="faktorial">Faktorial</label>
+            <input type="text" id="faktorial" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="jumlahDeret">Jumlah</label>
+            <input type="text" id="jumlahDeret" readonly>
+        </div>
+
+        <div class="button-group">
+            <button id="submitBtn">Submit</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const n = parseInt(document.getElementById('inputN').value);
+
+            if (isNaN(n) || n < 0) {
+                alert("Masukkan angka non-negatif untuk N.");
+                return;
+            }
+
+            let fact = 1;
+            if (n === 0) {
+                fact = 1;
+            } else {
+                for (let i = 1; i <= n; i++) {
+                    fact *= i;
+                }
+            }
+            document.getElementById('faktorial').value = fact.toLocaleString('id-ID');
+
+            let deret = "";
+            let sumDeret = 0;
+            for (let i = 1; i <= n; i++) {
+                deret += i;
+                sumDeret += i;
+                if (i < n) {
+                    deret += " + ";
+                }
+            }
+            if (n === 0) {
+                deret = "0";
+            }
+            document.getElementById('hasilDeret').value = deret;
+            document.getElementById('jumlahDeret').value = sumDeret.toLocaleString('id-ID');
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            document.getElementById('inputN').value = 0;
+            document.getElementById('hasilDeret').value = "";
+            document.getElementById('faktorial').value = "";
+            document.getElementById('jumlahDeret').value = "";
+        });
+    </script>
+
+</body>
+</html>

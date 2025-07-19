@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Saldo Tabungan</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container {
+            background-color: #eaf7f2;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        h1 { color: #2e7d32; text-align: center; margin-bottom: 25px; }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .input-group label { font-weight: bold; width: 100px; }
+        .input-group input[type="number"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output-results {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .output-results p {
+            background-color: #dcedc8;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Perhitungan Saldo Tabungan</h1>
+
+        <div class="input-group">
+            <label for="saldoAwal">Saldo Awal:</label>
+            <input type="number" id="saldoAwal" value="100000" readonly>
+        </div>
+
+        <div class="input-group">
+            <label for="bunga">Bunga (%):</label>
+            <input type="number" id="bunga" value="10" readonly>
+        </div>
+
+        <div class="input-group">
+            <label for="waktu">Waktu (Bulan):</label>
+            <input type="number" id="waktu" value="3" min="1" readonly>
+        </div>
+
+        <button id="hitungBtn">Hitung</button>
+
+        <div id="outputSaldo" class="output-results">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hitungBtn').addEventListener('click', function() {
+            let saldo = parseFloat(document.getElementById('saldoAwal').value);
+            const bungaRate = parseFloat(document.getElementById('bunga').value) / 100;
+            const waktu = parseInt(document.getElementById('waktu').value);
+
+            const outputDiv = document.getElementById('outputSaldo');
+            outputDiv.innerHTML = '';
+
+            for (let i = 1; i <= waktu; i++) {
+                saldo = saldo * (1 + bungaRate);
+                const p = document.createElement('p');
+                p.textContent = `Saldo Bulan ${i} = Rp. ${saldo.toLocaleString('id-ID')}`;
+                outputDiv.appendChild(p);
+            }
+        });
+    </script>
+
+</body>
+</html>
